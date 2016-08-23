@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="entity.Teacher" table="Teacher">
+  <id 
+  	column="ID" 
+  	name="id" 
+  	type="java.lang.Integer">
+	<!--generator：主键的生成策略 native可以适应多种数据库  increment MySQL自动增长策略  sequence oracle自动增长策略 -->
+   <generator class="increment"/>
+  </id>
+  <property 
+  	column="NAME" 
+  	length="255" 
+  	name="name" 
+  	type="java.lang.String"/>
+  <property 
+  	column="AGE"   
+  	length="4"
+   	name="age" 
+   	type="java.lang.Integer"/>
+  <property 
+  	column="GENDER"   
+  	length="6"
+   	name="gender" 
+   	type="java.lang.String"/>
+  <property 
+  	column="SALARY"   
+  	length="10"
+   	name="salary" 
+   	type="java.lang.Double"/>
+  <property 
+  	column="SUBJECT"  
+	length="255"
+   	name="subject" 
+   	type="java.lang.String"/>
+  <property 
+  	column="SCHOOLID"   
+  	length="10"
+   	name="schoolID" 
+   	type="java.lang.Integer"/>
+   
+  <many-to-one 
+  	name="school" 
+    class="entity.School"
+    column="schoolID" 
+    unique="true"
+    cascade="all"
+    not-null="true"
+    insert="false"
+    update="false"/>
+    <!-- not-null="true" or not-null="false" 是否可以为空-->
+    <!-- insert/update="true" or insert/update="false" 插入或更新Teacher实体是否也插入或更新对应的School实体-->
+  <!-- outer-join="auto" -->
+  <set
+        name="students"
+        lazy="true"
+        inverse="true"
+		cascade="all"
+  >
+        <key>
+            <column name="teacherID" />
+        </key>
+        <one-to-many 
+            class="entity.Teacher"
+        />
+  </set>
+    
+ </class>
+</hibernate-mapping>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="entity.School" table="School">
+  <id 
+  	column="ID" 
+  	name="id" 
+  	type="java.lang.Integer">
+  	<!--generator：主键的生成策略 native可以适应多种数据库  increment MySQL自动增长策略  sequence oracle自动增长策略 -->
+   <generator class="increment"/>
+  </id>
+  <property 
+  	column="NAME" 
+  	length="255"
+  	name="name" 
+  	type="java.lang.String"/>
+  <property 
+  	column="TEL" 
+  	length="255"
+   	name="tel" 
+   	type="java.lang.String"/>
+  <property 
+  	column="CITY" 
+  	length="255"
+   	name="city" 
+   	type="java.lang.String"/>
+  <property 
+  	column="OUTLAY" 
+  	length="10" 
+  	name="outlay" 
+  	type="java.lang.Double"/>
+  <property 
+  	column="TYPE"
+  	length="255"
+  	name="type"
+  	type="java.lang.String"/>
+  <set
+        name="students"
+        lazy="true"
+        inverse="true"
+		cascade="all"
+  >
+        <key>
+            <column name="schoolID" />
+        </key>
+        <one-to-many 
+            class="entity.School"
+        />
+  </set>
+  <set
+        name="teachers"
+        lazy="true"
+        inverse="true"
+		cascade="all"
+  >
+        <key>
+            <column name="schoolID" />
+        </key>
+        <one-to-many 
+            class="entity.School"
+        />
+  </set> 
+
+ </class>
+</hibernate-mapping>

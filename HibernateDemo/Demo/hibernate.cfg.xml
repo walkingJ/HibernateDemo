@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<!-- 采用proxool连接池 -->
+<hibernate-configuration>
+<session-factory>
+	<property name="hibernate.proxool.pool_alias">proxoolPool</property>
+	<property name="hibernate.proxool.xml">proxoolconf.xml</property>
+	<property name="hibernate.connection.driver_class">
+		org.hibernate.proxool.internal.ProxoolConnectionProvider
+	</property>
+	<property name="hibernate.connection.release_mode">auto</property>
+	<property name="hibernate.dialect">
+		org.hibernate.dialect.MySQLDialect
+	</property>
+	<property name="connection.autocommit">true</property>
+	<property name="hibernate.show_sql">true</property>
+	<!-- 输出格式化后的SQL,更方便查看  --> 
+	<property name="format_sql">true</property>
+	<!-- 表的映射 -->
+	<property name="dialect"></property>
+	<mapping resource="mapping/Teacher.hbm.xml"></mapping>
+	<mapping resource="mapping/Student.hbm.xml"></mapping>
+	<mapping resource="mapping/School.hbm.xml"></mapping>
+</session-factory>
+</hibernate-configuration>  

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="entity.Student" table="Student">
+  <id 
+  	column="ID" 
+  	name="id" 
+  	type="java.lang.Integer">
+  	<!--generator：主键的生成策略 native可以适应多种数据库  increment MySQL自动增长策略  sequence oracle自动增长策略 -->
+   <generator class="increment"/>
+  </id>
+  <property 
+  	column="NAME" 
+  	length="255"
+  	name="name" 
+  	type="java.lang.String"/>
+  <property 
+  	column="AGE" 
+  	length="4"
+   	name="age" 
+   	type="java.lang.Integer"/>
+  <property 
+  	column="GENDER" 
+  	length="6"
+   	name="gender" 
+   	type="java.lang.String"/>
+  <property 
+  	column="CLASSNAME" 
+  	length="255" 
+  	name="className" 
+  	type="java.lang.String"/>
+   <property 
+  	column="HEADTEACHER" 
+  	length="255" 
+  	name="headTeacher" 
+  	type="java.lang.String"/> 
+  <property 
+  	column="TEACHERID" 
+  	length="10"
+   	name="teacherID" 
+   	type="java.lang.Integer"/>
+  <property 
+  	column="SCHOOLID" 
+  	length="10"
+   	name="schoolID" 
+   	type="java.lang.Integer"/>	
+  <!-- 
+  <property column="HEADTEACHER" generated="never" lazy="false"
+   length="255" name="headTeacher" type="java.lang.String"/>
+  --> 
+  <!--  
+  <many-to-one 
+  	name="headTeacher" 
+  	column="HEADTEACHER" 
+  	class="entity.Teacher"
+  	property-ref="name"/>
+  -->  
+  <many-to-one 
+  	name="teacher" 
+    class="entity.Teacher"
+    column="teacherID" 
+    unique="true"
+    cascade="all"
+    not-null="true"
+    insert="false"
+    update="false"/>
+  <many-to-one 
+  	name="school" 
+    class="entity.School"
+    column="schoolID" 
+    unique="true"
+    cascade="all"
+    not-null="true"
+    insert="false"
+    update="false"/>
+ </class>
+</hibernate-mapping>
